@@ -23,49 +23,65 @@ namespace VerzamelWoede.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(int? categoryId)
+        public async Task<IActionResult> Index(int? categoryId, string? sortOrder)
         {
             var user = await _userManager.GetUserAsync(User);
             var userId = user?.Id;
+
+            if (sortOrder == null || sortOrder == "asc")
+            {
+                sortOrder = "asc";
+            }
+            else
+            {
+                sortOrder = "desc";
+            }
             if (userId == null)
             {
                 return NotFound();
             }
+            List<Item> items;
             if (categoryId != null)
             {
-                var items = await _context.Items
+                items = await _context.Items
                     .Include(i => i.Category)
                     .Where(c => c.CategoryId == categoryId)
                     .Include(i => i.Collections)
                     .Where(i => i.Collections.Any(c => c.UserId == userId))
                     .ToListAsync();
 
-                var categories = await _context.Categories.ToListAsync();
-
-                var vm = new CategoryItem()
-                {
-                    Items = items,
-                    Categories = categories
-                };
-                return View(vm);
+                
             }
             else
             {
-                var items = await _context.Items
+                 items = await _context.Items
                     .Include(i => i.Category)
                     .Include(i => i.Collections)
                     .Where(i => i.Collections.Any(c => c.UserId == userId))
                     .ToListAsync();
 
-                var categories = await _context.Categories.ToListAsync();
-
-                var vm = new CategoryItem()
-                {
-                    Items = items,
-                    Categories = categories
-                };
-                return View(vm);
             }
+
+            if (sortOrder == "asc")
+            {
+                items = items.OrderBy(i => i.CollectionDate).ToList();
+            }
+            else
+            {
+                items = items.OrderByDescending(i => i.CollectionDate).ToList();
+            }
+
+            var categories = await _context.Categories.ToListAsync();
+
+            var vm = new CategoryItem()
+            {
+                Items = items,
+                Categories = categories
+            };
+
+            ViewBag.SortOrder = sortOrder;
+
+            return View(vm);
         }
 
         public IActionResult Privacy()

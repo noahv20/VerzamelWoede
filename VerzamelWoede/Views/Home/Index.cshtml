@@ -30,27 +30,28 @@
             <thead>
                 <tr>
                     <th>
-                        Name
+                        <button class="btn btn-primary" >Name</button>
                     </th>
                     <th>
-                        Description
+                        <button class="btn btn-primary">Description</button>
                     </th>
                     <th>
-                        Worth
+                        <button class="btn btn-primary">Worth</button>
                     </th>
                     <th>
-                        Price
+                        <button class="btn btn-primary">Price</button>
                     </th>
                     <th>
-                        Year
+                        <button class="btn btn-primary">Year</button>
                     </th>
                     <th>
-                        CollectionDate
+                        <a class="btn btn-primary" asp-action="Index" asp-route-sortOrder="@(ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                            Collection Date @(ViewBag.SortOrder == "asc" ? "↑" : "↓")
+                        </a>
                     </th>
                     <th>
-                        Category
+                        <button class="btn btn-primary">Category</button>
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
