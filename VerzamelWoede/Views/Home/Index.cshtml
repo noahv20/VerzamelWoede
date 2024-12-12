@@ -23,6 +23,12 @@
         {
             <a class="btn btn-secondary" asp-action="Index" asp-controller="Home" asp-route-categoryId="@cat.Id">@cat.Name</a>
         }
+        <div class="input-group text-center">
+            <form class="d-flex" method="get">
+                <input class="form-control me-sm-2" type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Search items..." />
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
         <div>
             <a class="btn btn-success" asp-action="Create" asp-controller="Items">New Item</a>
         </div>

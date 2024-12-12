@@ -23,7 +23,7 @@ namespace VerzamelWoede.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(int? categoryId, string? sortOrder)
+        public async Task<IActionResult> Index(int? categoryId, string? sortOrder,string? searchString)
         {
             var user = await _userManager.GetUserAsync(User);
             var userId = user?.Id;
@@ -60,6 +60,10 @@ namespace VerzamelWoede.Controllers
                     .Where(i => i.Collections.Any(c => c.UserId == userId))
                     .ToListAsync();
 
+            }
+            if (searchString != null)
+            {
+                items = items.Where(i => i.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
             if (sortOrder == "asc")
