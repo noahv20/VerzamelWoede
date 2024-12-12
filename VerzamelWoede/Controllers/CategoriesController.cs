@@ -60,7 +60,7 @@ namespace VerzamelWoede.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create","Items");
             }
             return View(category);
         }
