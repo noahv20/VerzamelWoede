@@ -42,16 +42,10 @@
                         <button class="btn btn-primary" >Name</button>
                     </th>
                     <th>
-                        <button class="btn btn-primary">Description</button>
-                    </th>
-                    <th>
                         <button class="btn btn-primary">Worth</button>
                     </th>
                     <th>
                         <button class="btn btn-primary">Price</button>
-                    </th>
-                    <th>
-                        <button class="btn btn-primary">Year</button>
                     </th>
                     <th>
                         <a class="btn btn-primary" asp-action="Index" asp-route-sortOrder="@(ViewBag.SortOrder == "asc" ? "desc" : "asc")">
@@ -74,16 +68,10 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Worth)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CollectionDate)
@@ -94,7 +82,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <a class="btn btn-warning" asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
-                                <a class="btn btn-info" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                <a class="btn btn-info" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">More Info...</a>
                                 <a class="btn btn-danger" asp-action="Delete" asp-controller="Items" asp-route-id="@item.Id">Delete</a>
                             </div>
                         </td>
