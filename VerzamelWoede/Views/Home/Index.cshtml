@@ -73,9 +73,18 @@
                 @foreach (var item in Model.Items)
                 {
                     <tr>
-                        <td>
-                            <img src="~/Images/@item.ImageFileName" width="150"/>
-                        </td>
+                        @if(item.ImageFileName == null)
+                        {
+                            <td>
+                                Geen foto
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <img src="~/Images/@item.ImageFileName" width="150" />
+                            </td>
+                        }
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
