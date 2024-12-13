@@ -17,6 +17,7 @@ namespace VerzamelWoede.Models
         public int? Year { get; set; }
         [Required]
         public DateTime CollectionDate { get; set; }
+        public string? ImageFileName { get; set; }
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
         public ICollection<Collection>? Collections { get; set; } = new List<Collection>();

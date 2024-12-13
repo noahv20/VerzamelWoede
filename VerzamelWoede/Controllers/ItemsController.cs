@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,6 +24,7 @@ namespace VerzamelWoede.Controllers
         }
 
         // GET: Items
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Items.Include(i => i.Category);
@@ -60,7 +62,7 @@ namespace VerzamelWoede.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,Worth,Price,Year,CollectionDate,CategoryId")] Item item)
+        public async Task<IActionResult> Create([Bind("Name,Description,Worth,Price,Year,CollectionDate,ImageFileName,CategoryId")] Item item)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -85,7 +87,7 @@ namespace VerzamelWoede.Controllers
             {
                 _context.Add(collection);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", item.CategoryId);
             return View(item);
@@ -113,7 +115,7 @@ namespace VerzamelWoede.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Worth,Price,Year,CollectionDate,CategoryId")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Worth,Price,Year,CollectionDate,ImageFileName,CategoryId")] Item item)
         {
             if (id != item.Id)
             {

@@ -36,6 +36,9 @@
             <thead>
                 <tr>
                     <th>
+
+                    </th>
+                    <th>
                         <button class="btn btn-primary" >Name</button>
                     </th>
                     <th>
@@ -64,6 +67,9 @@
                 @foreach (var item in Model.Items)
                 {
                     <tr>
+                        <td>
+                            <img src="~/Images/@item.ImageFileName" width="200"/>
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
