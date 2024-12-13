@@ -60,6 +60,7 @@ namespace VerzamelWoede.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Categorie succesvol aangemaakt!";
                 return RedirectToAction("Create","Items");
             }
             return View(category);

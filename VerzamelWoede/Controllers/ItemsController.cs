@@ -87,6 +87,7 @@ namespace VerzamelWoede.Controllers
             {
                 _context.Add(collection);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Item succesvol aangemaakt!";
                 return RedirectToAction("Index", "Home");
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", item.CategoryId);
