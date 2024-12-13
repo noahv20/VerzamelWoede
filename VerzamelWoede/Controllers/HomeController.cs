@@ -41,6 +41,7 @@ namespace VerzamelWoede.Controllers
                 return NotFound();
             }
             List<Item> items;
+
             if (categoryId != null)
             {
                 items = await _context.Items
